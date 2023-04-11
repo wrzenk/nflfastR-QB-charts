@@ -18,4 +18,3 @@ Developed with:
 # Big thanks to:
 - The [nflfastR](https://www.nflfastr.com/) team for providing the free play-by-play data
 - The open source community for helping me learn Python and publish my first project
-- [r/KansasCityChiefs](https://www.reddit.com/r/KansasCityChiefs/) for the upvotes
