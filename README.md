@@ -18,3 +18,5 @@ Developed with:
 # Big thanks to:
 - The [nflfastR](https://www.nflfastr.com/) team for providing the free play-by-play data
 - The open source community for helping me learn Python and publish my first project
+
+Please direct any donations to [Harvesters Community Food Network](https://www.harvesters.org/how-to-help/donate)
