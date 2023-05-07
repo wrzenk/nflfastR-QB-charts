@@ -1,10 +1,14 @@
 """
 ****** RUN THIS SCRIPT FIRST *******
 
-The download_years function downloads nflfastR data for a specified number of years. After downloading, it calls the clean_nflfastr_data function to removed unneeded data.
+The download_years function downloads nflfastR data for a specified number of
+years. After downloading, it calls the clean_nflfastr_data function to remove
+unneeded data.
 
-use_list is the list of nflfastR fields you plan to use in the charts. If you're expanding on my original files, you will likely need to edit that list. Find detailed field descriptions here: https://www.nflfastr.com/articles/field_descriptions.html
-
+use_list is the list of nflfastR fields you plan to use in the charts. If 
+you're expanding on my original files, you will possibly need to edit that
+list. Find detailed field descriptions here: 
+    https://www.nflfastr.com/articles/field_descriptions.html
 """
 
 import time

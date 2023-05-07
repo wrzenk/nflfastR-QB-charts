@@ -1,8 +1,15 @@
 """
-This file reads in csv files from nflfastR's dataset (1999-current). Then finds which passer has the most qb_epa after n games, for n = 1 up to the most games played. It exports a csv and a .png file. It returns the filtered data and the table (in dataframes).
+This file reads in csv files from nflfastR's dataset (1999-current). Then finds
+which passer has the most qb_epa after n games, for n = 1 up to the most games
+played. It exports a csv and a .png file. It returns the filtered data and the
+table (in dataframes).
 
-For a while I was worried that the qb_epa field didn't include designed qb runs, but apparently it does. Definitively confirmed by Josh Allen's week 1 rush against the Rams in 2022. With 11:35 left in the 3rd quarter, Josh rushed for 7 yards on 2nd and 9 (row 270 in the 2022.csv). It wasn't a scramble, it was a run play. And he was credited with 0.148121458943933 qb_epa, so it's not just passing plays.
-
+For a while I was worried that the qb_epa field didn't include designed qb 
+runs, but apparently it does. Definitively confirmed by Josh Allen's week 1 
+rush against the Rams in 2022. With 11:35 left in the 3rd quarter, Josh rushed
+for 7 yards on 2nd and 9 (row 270 in the 2022.csv). It wasn't a scramble, it
+was a run play. And he was credited with 0.148121458943933 qb_epa, so it's not
+just passing plays.
 """
 
 import time
@@ -36,7 +43,6 @@ def epa_func(last_year,chart_rows=35):
                                           'passer_id',
                                           'posteam']].sum().reset_index()
         # combine into one file
-        # data = data.append(filt_data, sort=True) # depricated
         data = pd.concat([data,filt_data])
     
     # sort by game_id, then by passer
@@ -61,7 +67,7 @@ def epa_func(last_year,chart_rows=35):
     if data.loc[data_rows - 1, 'passer_id']==data.loc[data_rows - 2, 'passer_id']:
         game_num[data_rows - 1] = game_num[data_rows - 2] + 1
     
-    # convert game_num to DataFrame            
+    # convert game_num to DataFrame
     game_num = pd.DataFrame(game_num,range(0,data_rows),['game_num'])
     
     # combine game_num into data
@@ -90,10 +96,6 @@ def epa_func(last_year,chart_rows=35):
         k = k + 1
     pd.options.mode.chained_assignment = 'warn'  # default='warn'
     
-    # combine game_number into data
-    # what the heck, it's already there? cum_epa replaced 'epa' somehow. That's fine I guess.
-    # data = pd.concat([data, cum_epa], axis=1)
-    
     # find the highest EPA for game 1, game 2, etc.
     data = data.sort_values(by=['game_num','qb_epa']).reset_index(drop=True)
     
@@ -114,7 +116,7 @@ def epa_func(last_year,chart_rows=35):
         game_num_count[n-1] = data.loc[(data.game_num==n),"passer_id"].count()
     
     # find the index for the last game 1, game 2, game 3, etc
-    # this "should" be the index for the passer name and epa total for the final chart
+    # this will be the index for the passer name and epa total for the final chart
     data_index = np.zeros(int(game_num_max))
     
     for p in range(0,int(game_num_max-1)):
@@ -164,10 +166,8 @@ def epa_func(last_year,chart_rows=35):
     # change floats to ints
     the_list['Gm'] = the_list['Gm'].astype(int)
     
-    # save the chart (not needed anymore since I created df2table)
-    # the_list.to_csv('the_qb_epa_chart_1999_to_' + str(last_year) + '.csv', compression=None, index=False)
-    
     # save to image w/ format_table (with annoying vertical line adjustment)
+    # if the vertical lines aren't lined up properly, tweak the last argument
     df2table(the_list,chart_rows,'EPA_chart.png',0.994)
     print('')
     

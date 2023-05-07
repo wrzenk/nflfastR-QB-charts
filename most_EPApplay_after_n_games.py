@@ -1,7 +1,11 @@
 """
-This file reads in csv files from nflfastR's dataset (1999-current). Then finds which passer has the most qb_epa per dropback after n games, for n = 1 up to the most games played. It exports a csv and a .png file. It returns the filtered data in a dataframe.
+This file reads in csv files from nflfastR's dataset (1999-current). Then find
+which passer has the most qb_epa per dropback after n games, for n = 1 up to 
+the most games played. It exports a csv and a .png file. It returns the 
+filtered data in a dataframe.
 
-I annoyingly use "per play" and "per dropback" interchangeably throughout this script
+I annoyingly use "per play" and "per dropback" interchangeably throughout this 
+script
 
 """
 
@@ -33,7 +37,9 @@ def epa_dpbk(last_year,chart_rows=35):
         sys.stdout.write("processing EPA/play for {:2d}".format(i))
         sys.stdout.flush()
         
-        filt_data = pd.read_csv('cleaned_data\\' + str(i) + '.csv', compression=None, low_memory=False)
+        filt_data = pd.read_csv('cleaned_data\\' + str(i) + '.csv', 
+                                compression=None, 
+                                low_memory=False)
         filt_data = filt_data.groupby(['passer_id',
                                        'game_id',
                                        'passer',
@@ -45,7 +51,6 @@ def epa_dpbk(last_year,chart_rows=35):
                                           'qb_dropback'
                                           ]].sum().reset_index()
         # combine into one file
-        # data = data.append(filt_data, sort=True) # deprecated
         data = pd.concat([data,filt_data])
     
     # drop Brad Johnson because he just doesn't belong there...sorry dude
@@ -74,7 +79,8 @@ def epa_dpbk(last_year,chart_rows=35):
         j = j + 1
     
     # fix the last row
-    if data.loc[data_rows - 1, 'passer_id']==data.loc[data_rows - 2, 'passer_id']:
+    if data.loc[data_rows - 1, 'passer_id']==data.loc[data_rows - 2, 
+                                                      'passer_id']:
         game_num[data_rows - 1] = game_num[data_rows - 2] + 1
     
     # convert game_num to DataFrame
@@ -151,7 +157,7 @@ def epa_dpbk(last_year,chart_rows=35):
     data = data.drop(to_drop)
     
     # find the highest EPA for game 1, game 2, etc.
-        # sort by epa within each game_num
+    # sort by epa within each game_num
     data = data.sort_values(by=['game_num','epapp']).reset_index(drop=True)
     
     # reorder columns for easy pasting
@@ -171,7 +177,7 @@ def epa_dpbk(last_year,chart_rows=35):
         game_num_count[n-1] = data.loc[(data.game_num==n), 'passer_id'].count()
     
     # find the index for the highest game 1, game 2, game 3, etc
-    # this "should" be the index for the passer name and epa total for the final chart
+    # this will be the index for the passer name and epa total for the final chart
     data_index = np.zeros(int(game_num_max))
     
     for p in range(0,int(game_num_max-1)):
@@ -196,7 +202,7 @@ def epa_dpbk(last_year,chart_rows=35):
         u_idx = u_idx[0]
         if gms_played.loc[u_idx,'passer_id'] == u and gms_played.loc[u_idx,'game_num'] == the_EPA_per_play_chart.loc[w,'game_num']:
             the_EPA_per_play_chart.loc[w,'passer'] = the_EPA_per_play_chart.loc[w,'passer']+'*'
-        # give Warner the right colors
+        # give Warner the old school STL colors
         if u == '00-0017200':
             the_EPA_per_play_chart.loc[w,'posteam'] = 'STL'
         w = w + 1
@@ -215,10 +221,8 @@ def epa_dpbk(last_year,chart_rows=35):
     the_EPA_per_play_chart['style'] = 'normal'
     
     # save chart as image (with annoying vertical line adjustment)
+    # if the vertical lines aren't lined up properly, tweak the last argument
     df2table(the_EPA_per_play_chart,chart_rows,'EPApp_chart.png',0.996)
-    
-    # save the chart as csv (not needed anymore since I created df2table)
-    # the_EPA_per_play_chart.to_csv('the_EPA_per_play_chart_' + str(first_year) + '_to_' + str(last_year) + '.csv', compression=None, index=False)
     
     t_1 = time.time()
     elapsed_1 = t_1 - t_0

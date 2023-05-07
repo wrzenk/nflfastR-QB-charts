@@ -1,13 +1,13 @@
 """
-Run nflfastR_download.py first to download data from 1999 to present. Then use this script to create charts and keep them updated weekly.
+Run nflfastR_download.py first to download data from 1999 to present. Then use
+this script to create charts and keep them updated weekly.
 
 This script uses the following scripts:
-    nflfastR_download.py
+    nflfastR_download.py (to download the updated data from the current nfl yr)
     most_qb_epa_after_n_games.py
         format_table.py
     most_EPApplay_after_n_games.py
         format_table.py
-
 """
 
 import time
