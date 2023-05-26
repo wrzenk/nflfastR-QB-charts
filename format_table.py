@@ -2,17 +2,17 @@
 This script accepts a dataframe with the following columns: 
     games, qb, stat, team, style.
 
-The first 3 columns go on the chart. Team column determines the color of the 
-cell and text (per the tm_color_lkup dictionary defined below). The style 
+The first 3 columns go on the chart. Team column determines the color of the
+cell and text (per the tm_color_lkup dictionary defined below). The style
 column specifies if the entry should be italicized or normal.
 
-The factor variable is a really annoying thing. When I get the coordinates for 
-the placement of the black vertical lines, they are scaled outward from the 
-middle by just a little--usually just a few pixels at the edge. The factor 
-squishes them back toward the middle. A factor value of 1 will not have any 
-effect on the line placement. The factor usually needs to be smaller as more 
-columns are added to the chart. I haven't figured out an easy way to calculate 
-the needed adjustment, so for now it is hard coded for each chart and passed 
+The factor variable is a really annoying thing. When I get the coordinates for
+the placement of the black vertical lines, they are scaled outward from the
+middle by just a little--usually just a few pixels at the edge. The factor
+squishes them back toward the middle. A factor value of 1 will not have any
+effect on the line placement. The factor usually needs to be smaller as more
+columns are added to the chart. I haven't figured out an easy way to calculate
+the needed adjustment, so for now it is hard coded for each chart and passed
 into this script. Very annoying.
 
 """
@@ -24,7 +24,9 @@ import statistics as stats
 
 def df2table(data,want_rows = 3,filename = 'tableplot.png',factor = 0.995):
     # define team colors in a dict 
-    # 'Team abbreviation':['background color','font color']
+    # structured as 'Team abbreviation':['background color','font color']
+    # feel free to change these colors with any hex value
+    # note: 'STL' Rams colors are different than 'LAR' Rams colors
     tm_color_lkup = {'KC' :['#FF0000','#FFFF00'],
                      'GB' :['#38761d','#FFFF00'],
                      'ARI':['red','#FFFFFF'],
@@ -83,14 +85,14 @@ def df2table(data,want_rows = 3,filename = 'tableplot.png',factor = 0.995):
     fig.patch.set_visible(False)
     ax.axis('off')
     ax.axis('tight')
-    font = 'Calibri'
-    weight = 'bold'
+    font = 'Calibri'   # Carlito, Calibri
+    weight = 'bold'     # 'extra bold', 'normal'
     
     plt.rcParams['font.family'] = font
     
     # find dimensions of dataframe
     num_rows = len(df)
-    entries = num_rows
+    entries = num_rows # save number of entries for later
     num_cols = len(df.columns)
     col_names = list(df.columns)
     empty_list = [''] * num_cols
@@ -265,7 +267,6 @@ def df2table(data,want_rows = 3,filename = 'tableplot.png',factor = 0.995):
             vert(lin,want_rows+1)
     
     # save and show the table
-    # fig.canvas.draw() # I don't know where this line came from or what it does
     plt.draw()
     plt.savefig(filename, bbox_inches="tight", dpi = 120)
     plt.show()
@@ -282,7 +283,6 @@ if __name__ == '__main__':
                                 [7,'P.Mahomes',28,'KC','normal'],
                                 [8,'P.Mahomes',32,'KC','normal'],
                                 [9,'P.Mahomes',47,'KC','normal']
-                               ]
-                               ),
+                               ]),
                               columns = ['Gm','QB','TDs','posteam','style'])
     df2table(df,7,'tabletest.png',1.000)
