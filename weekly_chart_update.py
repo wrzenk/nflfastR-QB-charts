@@ -49,4 +49,4 @@ epapp_data = epa_dpbk(nfl_year,35) # 2nd arg defines rows in final chart
 t_f = time.time()
 elapsed_1 = round(t_f - t_0)
 elapsed_min = elapsed_1/60
-print(f'all updates took {elapsed_1} seconds or {elapsed_min:0.2f} mins')
+print(f'all updates took {elapsed_1:,} seconds or {elapsed_min:0.2f} mins')
