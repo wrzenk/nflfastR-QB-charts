@@ -9,15 +9,12 @@ This script uses the following scripts:
         format_table.py
 
 """
-
 import time
 import nflfastR_download
 from most_EPApplay_after_n_games import epa_dpbk
 from most_qb_epa_after_n_games import epa_func
 
-
 nfl_year = 2023  # ongoing season to update (re-download & process)
-hrs = 6          # minimum hours between downloads to avoid unnecessary traffic
 
 # start timer
 t_0=time.time()
