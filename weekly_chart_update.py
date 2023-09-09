@@ -17,9 +17,9 @@ from most_qb_epa_after_n_games import epa_func
 nfl_year = 2023  # ongoing season to update (re-download & process)
 
 # start timer
-t_0=time.time()
+t0=time.time()
 
-# download data if hrs hours has elapsed from last download
+# download data to update this year's data
 print(f'downloading {nfl_year} data')
 nflfastR_download.download_years(nfl_year,nfl_year)
 
@@ -30,7 +30,6 @@ tot_epa_data = epa_func(nfl_year,35) # 2nd arg defines rows in final chart
 epapp_data = epa_dpbk(nfl_year,35) # 2nd arg defines rows in final chart
 
 # calculate and display time elapsed
-t_f = time.time()
-elapsed_1 = round(t_f - t_0)
-elapsed_min = elapsed_1/60
-print(f'all updates took {elapsed_1} seconds or {elapsed_min:0.2f} mins')
+elapsed = time.time() - t0
+elapsed_min = elapsed/60
+print(f'all updates took {elapsed:,.1f} seconds or {elapsed_min:,.2f} mins')
