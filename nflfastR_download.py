@@ -1,9 +1,8 @@
 """
 ****** RUN THIS SCRIPT FIRST *******
-
 The download_years function downloads nflfastR data for a specified number of
 years. After downloading, it calls the clean_nflfastr_data function to remove
-unneeded data.
+unneeded data--this makes processing the data MUCH faster.
 
 use_list is the list of nflfastR fields you plan to use in the charts. If 
 you're expanding on my original files, you will possibly need to edit that
@@ -19,7 +18,7 @@ import numpy as np
 
 def download_years(first_year,last_year):
     # start timer
-    t_0=time.time()
+    t0=time.time()
     
     # check if the raw data directory doesn't exist
     if not os.path.exists("raw_yearly_data"):
@@ -53,11 +52,10 @@ def download_years(first_year,last_year):
         clean_nflfastr_data(filename)
     
     # stop timer and report
-    t_1 = time.time()
-    elapsed = round(t_1 - t_0)
+    elapsed = time.time() - t0
     yrs_ct = len(dl_years)
     print('Done.')
-    print(f'Downloading/saving {yrs_ct} year(s) took {elapsed} seconds')
+    print(f'Downloading/saving {yrs_ct} year(s) took {elapsed:.1f} seconds')
     return
 
 def clean_nflfastr_data(file):
@@ -99,4 +97,4 @@ if __name__ == '__main__':
     # Note: nflfastR data goes back to 1999
     # It is updated within 24 hours after the completion of each game
     # (usually within 6 hours)
-    download_years(1999,2022)
+    download_years(1999,2023)
