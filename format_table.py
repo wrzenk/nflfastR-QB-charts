@@ -98,7 +98,11 @@ def df2table(data,want_rows = 3,filename = 'tableplot.png',factor = 0.995):
     empty_list = [''] * num_cols
     
     # find number of blank rows to add to make multiple of want_rows
+    # if the chart only needs 1 column, don't make any blank rows
+    if num_rows < want_rows:
+        want_rows = num_rows
     num_to_add = want_rows - (num_rows % want_rows)
+    
     df_to_add = pd.DataFrame(np.array([empty_list]), columns = col_names)
     for x in range(num_to_add):
         df = pd.concat([df,df_to_add], ignore_index = True)

@@ -14,7 +14,8 @@ import nflfastR_download
 from most_EPApplay_after_n_games import epa_dpbk
 from most_qb_epa_after_n_games import epa_func
 
-nfl_year = 2023  # ongoing season to update (re-download & process)
+nfl_year = 2023  # change this once every year, after week 1
+chart_rows = 35  # number of rows to put in charts (use 383 for 1 column)
 
 # start timer
 t0=time.time()
@@ -24,10 +25,10 @@ print(f'downloading {nfl_year} data')
 nflfastR_download.download_years(nfl_year,nfl_year)
 
 # update epa chart
-tot_epa_data = epa_func(nfl_year,35) # 2nd arg defines rows in final chart
+tot_epa_data = epa_func(nfl_year,chart_rows)
 
 # update epa/dropback
-epapp_data = epa_dpbk(nfl_year,35) # 2nd arg defines rows in final chart
+epapp_data = epa_dpbk(nfl_year,chart_rows)
 
 # calculate and display time elapsed
 elapsed = time.time() - t0
