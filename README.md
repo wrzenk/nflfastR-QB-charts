@@ -2,7 +2,7 @@
 
 This repository uses nflfastR play-by-play data to create charts like this:
 
-![Most EPA after n games (updated Apr 2023)](https://i.imgur.com/yRMx3Vv.png)
+![Most EPA after n games (updated Sep 2023)](https://i.imgur.com/QlvWH3O.png)
 
 Explanation of how to read this chart: It is essentially a long list of records. If you want to know which QB had the most career EPA after 50 games, find the "Gm" column with the number 50. That row will show you that Mahomes holds the record with 726.3 EPA after his 50th career game. If you want to know who holds the record for 150 career games, find the "Gm" column with 150. That row shows Aaron Rodgers holds the record with 1452.4 EPA.
 
