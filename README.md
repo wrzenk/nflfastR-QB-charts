@@ -18,6 +18,7 @@ Developed with:
 - matplotlib 3.5.1
 
 # Acknowledgements
+Big thanks to:
 - The [nflfastR](https://www.nflfastr.com/) team for providing the free play-by-play data
 - The open source community for helping me learn Python and publish my first project
     - It was Deryck97's guide that got me started: https://gist.github.com/Deryck97/dff8d33e9f841568201a2a0d5519ac5e
