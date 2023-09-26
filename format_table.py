@@ -272,7 +272,7 @@ def df2table(data,want_rows = 3,filename = 'tableplot.png',factor = 0.995):
     
     # save and show the table
     plt.draw()
-    plt.savefig(filename, bbox_inches="tight", dpi = 120)
+    plt.savefig(filename, bbox_inches="tight", dpi = 120, pad_inches = 0)
     plt.show()
     return
 
