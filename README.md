@@ -1,6 +1,6 @@
 # Most EPA after n career games
 
-This repository uses nflfastR play-by-play data to create charts like this:
+This repository uses nflfastR play-by-play data to create charts like this (updated Sep 2023):
 
 ![Most EPA after n games (updated Sep 2023)](https://i.imgur.com/QlvWH3O.png)
 
