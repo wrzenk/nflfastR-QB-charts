@@ -165,7 +165,9 @@ def epa_dpbk(last_year,chart_rows=35):
     
     # round epapp
     data.loc[:,'epapp'] = np.round(data.loc[:,'epapp'], 3)
-    epapp_return_data = data
+    
+    # save data to return
+    epapp_return_data = data.copy(deep=True)
     
     # initialize some lists
     list_game_num = np.arange(1,game_num_max,dtype=int)
